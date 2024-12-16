@@ -51,4 +51,4 @@ def update_products_from_csv(csv_file):
             print(f"Created new product: {product_name}")
 
 if __name__ == "__main__":
-    update_products_from_csv('/Users/jaya.patibandla/Downloads/Sports_Ecommerce_Product_Data_updated.csv')  # Replace with the path to your CSV file
+    update_products_from_csv('/Users/jaya.patibandla/Downloads/Sports_Ecommerce_Product_Data_updated.csv')
