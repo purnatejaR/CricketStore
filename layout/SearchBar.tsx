@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { useSearchStore } from '../../store/searchStore';
-import { searchProducts } from '../../services/api'; // Import the search API function
+import { searchProducts } from '../../services/api'; 
 import { Link } from 'react-router-dom';
 
 export const SearchBar: React.FC = () => {
   const { setSearchQuery } = useSearchStore();
   const [localQuery, setLocalQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<any[]>([]); // State for search results
+  const [searchResults, setSearchResults] = useState<any[]>([]); 
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,27 +18,27 @@ export const SearchBar: React.FC = () => {
     const fetchSearchResults = async () => {
       if (localQuery) {
         try {
-          const response = await searchProducts(localQuery); // Call the search API
+          const response = await searchProducts(localQuery); 
           setSearchResults(response.data.products);
         } catch (error) {
           console.error('Failed to fetch search results', error);
         }
       } else {
-        setSearchResults([]); // Clear results if the query is empty
+        setSearchResults([]); 
       }
     };
 
     const debounceFetch = setTimeout(() => {
       fetchSearchResults();
-    }, 300); // Wait for 300ms after the user stops typing
+    }, 300); 
 
-    return () => clearTimeout(debounceFetch); // Cleanup the timeout
+    return () => clearTimeout(debounceFetch); 
   }, [localQuery]);
 
   const handleResultClick = (productId: string) => {
-    setLocalQuery(''); // Clear the input field
-    setSearchResults([]); // Clear the search results
-    setSearchQuery(localQuery); // Set the search query
+    setLocalQuery(''); 
+    setSearchResults([]); 
+    setSearchQuery(localQuery); 
   };
 
   return (
@@ -59,9 +59,9 @@ export const SearchBar: React.FC = () => {
             {searchResults.map((product) => (
               <Link
                 key={product.id}
-                to={`/product/${product.id}`} // Redirect to product page
+                to={`/product/${product.id}`} 
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                onClick={() => handleResultClick(product.id)} // Handle click
+                onClick={() => handleResultClick(product.id)} 
               >
                 {product.product_name}
               </Link>
